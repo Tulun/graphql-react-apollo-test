@@ -7,7 +7,7 @@ const UserType = require("./userType");
 
 // config
 const dbUrl = "http://localhost:3000";
-const { GraphQLObjectType, GraphQLString } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLList } = graphql;
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -18,6 +18,12 @@ const RootQuery = new GraphQLObjectType({
 
       resolve(_pv, args) {
         return axios.get(`${dbUrl}/users/${args.id}`).then(res => res.data);
+      }
+    },
+    users: {
+      type: new GraphQLList(UserType),
+      resolve: () => {
+        return axios.get(`${dbUrl}/users`).then(res => res.data);
       }
     }
   })
