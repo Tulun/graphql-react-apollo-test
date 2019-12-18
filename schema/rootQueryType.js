@@ -16,7 +16,6 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLString } },
-
       resolve(_pv, args) {
         return axios.get(`${dbUrl}/users/${args.id}`).then(res => res.data);
       }
@@ -31,6 +30,13 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(PostType),
       resolve: () => {
         return axios.get(`${dbUrl}/posts`).then(res => res.data);
+      }
+    },
+    post: {
+      type: PostType,
+      args: { id: { type: GraphQLString } },
+      resolve: (_pv, args) => {
+        return axios.get(`${dbUrl}/posts/${args.id}`).then(res => res.data);
       }
     }
   })
