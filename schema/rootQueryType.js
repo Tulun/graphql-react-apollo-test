@@ -4,9 +4,10 @@ const graphql = require("graphql");
 
 // Types
 const UserType = require("./userType");
+const PostType = require("./postType");
 
 // config
-const dbUrl = "http://localhost:3000";
+const { dbUrl } = require("../config");
 const { GraphQLObjectType, GraphQLString, GraphQLList } = graphql;
 
 const RootQuery = new GraphQLObjectType({
@@ -24,6 +25,12 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       resolve: () => {
         return axios.get(`${dbUrl}/users`).then(res => res.data);
+      }
+    },
+    posts: {
+      type: new GraphQLList(PostType),
+      resolve: () => {
+        return axios.get(`${dbUrl}/posts`).then(res => res.data);
       }
     }
   })
