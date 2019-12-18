@@ -1,8 +1,12 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
-
+const cors = require("cors");
 const app = express();
+const port = 4000;
+
+app.use(cors());
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -11,6 +15,6 @@ app.use(
   })
 );
 
-app.listen(4000, () => {
-  console.log("listening");
+app.listen(port, () => {
+  console.log("listening on " + port);
 });
