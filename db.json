@@ -38,6 +38,12 @@
       "content": "I'm less sure about it",
       "userId": "3",
       "likes": 0
+    },
+    {
+      "content": "First new post in GraphiQL",
+      "userId": "1",
+      "likes": 0,
+      "id": "FprcIwp"
     }
   ]
 }

@@ -26,6 +26,18 @@ const mutation = new GraphQLObjectType({
       resolve(_pv, args) {
         return axios.post(`${dbUrl}/users`, args).then(res => res.data);
       }
+    },
+    addPost: {
+      type: PostType,
+      args: {
+        content: { type: new GraphQLNonNull(GraphQLString) },
+        userId: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(_pv, args) {
+        return axios
+          .post(`${dbUrl}/posts`, { ...args, likes: 0 })
+          .then(res => res.data);
+      }
     }
     // addLyricToSong: {
     //   type: SongType,
