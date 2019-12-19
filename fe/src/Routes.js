@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Index from "./pages/index/Index";
 import Posts from "./pages/posts/Posts";
 import Users from "./pages/users/Users";
+import User from "./pages/user/User";
 
 const { Content } = Layout;
 
@@ -26,6 +27,7 @@ const Routes = () => {
           <Route path="/posts" exact>
             <Posts />
           </Route>
+          <Route path="/user/:id" component={User} />
         </Switch>
       </Content>
     </Layout>

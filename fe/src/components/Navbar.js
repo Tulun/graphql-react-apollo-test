@@ -6,6 +6,7 @@ import { withRouter } from "react-router";
 
 import "./Navbar.scss";
 
+const { Item } = Menu;
 const Navbar = ({ location }) => {
   const [currentView, setCurrentView] = useState(
     location.pathname !== "/" ? location.pathname.substring(1) : "index"
@@ -16,15 +17,15 @@ const Navbar = ({ location }) => {
       selectedKeys={[currentView]}
       mode="horizontal"
     >
-      <Menu.Item key="index">
+      <Item key="index">
         <Link to="/">Home</Link>
-      </Menu.Item>
-      <Menu.Item key="users">
+      </Item>
+      <Item key="users">
         <Link to="/users">Users</Link>
-      </Menu.Item>
-      <Menu.Item key="posts">
+      </Item>
+      <Item key="posts">
         <Link to="/posts">Posts</Link>
-      </Menu.Item>
+      </Item>
     </Menu>
   );
 };

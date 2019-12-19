@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Spin, Alert, List, Typography } from "antd";
+import { Link } from "react-router-dom";
 
 import "./Users.scss";
 
@@ -40,8 +41,10 @@ const Users = () => {
         renderItem={({ firstName, id }) => {
           return (
             <Item className="user-list-item">
-              <Text mark>{firstName}</Text>
-              <Text className="user-span">{id}</Text>
+              <Link to={`/user/${id}`}>
+                <Text mark>{firstName}</Text>
+                <Text className="user-span">{id}</Text>
+              </Link>
             </Item>
           );
         }}

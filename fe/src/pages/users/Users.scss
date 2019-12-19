@@ -1,5 +1,9 @@
 .user-list-item {
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
+
+  a {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 }
