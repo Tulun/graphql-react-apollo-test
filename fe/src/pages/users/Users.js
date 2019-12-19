@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 import { Spin, Alert, List, Typography } from "antd";
 import { Link } from "react-router-dom";
 
+import AddUserForm from "./AddUserForm";
 import "./Users.scss";
 
 const { Item } = List;
@@ -49,6 +50,7 @@ const Users = () => {
           );
         }}
       />
+      <AddUserForm />
     </div>
   );
 };
