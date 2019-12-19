@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Spin, Alert, List, Typography } from "antd";
 import fetchPosts from "../../queries/fetchPosts";
-import findUser from "../../queries/findUser";
+import findUser from "../../queries/fetchUser";
 
 const { Item } = List;
 const { Text } = Typography;
@@ -27,8 +27,6 @@ const User = ({ match }) => {
         type="error"
       />
     );
-
-  console.log("data", data, "pd", postsData);
 
   return (
     <div>
