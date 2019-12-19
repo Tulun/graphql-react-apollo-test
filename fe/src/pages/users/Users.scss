@@ -1,0 +1,11 @@
+.user-span {
+  margin-right: 4px;
+}
+
+.list {
+  width: 400px;
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+  }
+}

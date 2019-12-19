@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Spin, Alert } from "antd";
 
+import "./Users.scss";
 const query = gql`
   {
     posts {
@@ -28,7 +29,21 @@ const Users = () => {
     );
 
   console.log("data", data);
-  return <div>Users route</div>;
+
+  return (
+    <div>
+      <ul className="list">
+        {data.posts.map(({ id, content, user }) => {
+          return (
+            <li className="list-item" key={id}>
+              <span className="user-span">{user.firstName}:</span>
+              {content}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 export default Users;
