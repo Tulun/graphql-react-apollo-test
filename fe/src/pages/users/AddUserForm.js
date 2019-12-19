@@ -12,7 +12,7 @@ const AddUserForm = () => {
   };
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <form className="form" onSubmit={event => onSubmit(event)}>
       <h3>Add User</h3>
       <label className="label">First Name (required)</label>
       <input
@@ -28,6 +28,9 @@ const AddUserForm = () => {
         onChange={event => setAge(event.target.value)}
         value={age}
       />
+      <button className="button" onClick={event => onSubmit(event)}>
+        Submit
+      </button>
     </form>
   );
 };
