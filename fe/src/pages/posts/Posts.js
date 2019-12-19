@@ -1,28 +1,15 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { Spin, Alert, List, Typography } from "antd";
+import fetchPosts from "../../queries/fetchPosts";
 
 import "./Posts.scss";
 
 const { Item } = List;
 const { Text } = Typography;
 
-const query = gql`
-  {
-    posts {
-      id
-      content
-      user {
-        id
-        firstName
-      }
-    }
-  }
-`;
-
 const Posts = () => {
-  const { loading, error, data } = useQuery(query);
+  const { loading, error, data } = useQuery(fetchPosts);
   if (loading) return <Spin size="large" />;
   if (error)
     return (

@@ -1,5 +1,7 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt } = graphql;
+// const PostType = require("./postType");
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } = graphql;
+const { dbUrl } = require("../config");
 
 const UserType = new GraphQLObjectType({
   name: "UserType",
@@ -7,6 +9,9 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLString },
     firstName: { type: GraphQLString },
     age: { type: GraphQLInt }
+    // posts: {
+    //   type: new GraphQLList(PostType),
+    // }
   })
 });
 
