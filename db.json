@@ -74,6 +74,24 @@
       "userId": "1",
       "likes": 0,
       "id": "FprcIwp"
+    },
+    {
+      "content": "Test post",
+      "userId": "1",
+      "likes": 0,
+      "id": "gwSHPel"
+    },
+    {
+      "content": "Testing Again",
+      "userId": "1",
+      "likes": 0,
+      "id": "dGZv6k-"
+    },
+    {
+      "content": "We did it!",
+      "userId": "1",
+      "likes": 0,
+      "id": "V68Y0H0"
     }
   ]
 }

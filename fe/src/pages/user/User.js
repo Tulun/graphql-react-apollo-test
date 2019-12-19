@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Spin, Alert, List, Typography } from "antd";
 import fetchPosts from "../../queries/fetchPosts";
 import findUser from "../../queries/fetchUser";
+import AddPostForm from "./AddPostForm";
 
 const { Item } = List;
 const { Text } = Typography;
@@ -32,6 +33,7 @@ const User = ({ match }) => {
     <div>
       <p>{data.user.firstName}</p>
       <p>{data.user.age || "Age not specified."}</p>
+      <AddPostForm userId={match.params.id} />
       <List
         header={<div>Posts</div>}
         bordered
