@@ -23,6 +23,7 @@ const Users = () => {
 
   return (
     <div>
+      <AddUserForm />
       <List
         header={<div>Users</div>}
         bordered
@@ -38,7 +39,6 @@ const Users = () => {
           );
         }}
       />
-      <AddUserForm />
     </div>
   );
 };
