@@ -31,8 +31,8 @@ const User = ({ match }) => {
 
   return (
     <div>
-      <p>{data.user.firstName}</p>
-      <p>{data.user.age || "Age not specified."}</p>
+      <p>Name: {data.user.firstName}</p>
+      <p>Age: {data.user.age || "Age not specified."}</p>
       <AddPostForm userId={match.params.id} />
       <List
         header={<div>Posts</div>}
