@@ -12,8 +12,12 @@ import Routes from "./Routes";
 // Styles
 import "./App.css";
 
+// What this does is track ALL your data by a unique id. You inform Apollo what will uniquely identify each data point
+// In our case, each record has a unique id property.
+// If it's different, then specify a different id.
+// This will NOT work on added or deleted data, as this is done on initialization; you will have to do extra work around this.
 const cache = new InMemoryCache({
-  dataIdFromObject: object => object.id
+  dataIdFromObject: o => o.id || null
 });
 
 const link = new HttpLink({

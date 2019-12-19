@@ -1,27 +1,17 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { Spin, Alert, List, Typography } from "antd";
 import { Link } from "react-router-dom";
 
+import fetchUsers from "../../queries/fetchUsers";
 import AddUserForm from "./AddUserForm";
 import "./Users.scss";
 
 const { Item } = List;
 const { Text } = Typography;
 
-const query = gql`
-  {
-    users {
-      id
-      firstName
-      age
-    }
-  }
-`;
-
 const Users = () => {
-  const { loading, error, data } = useQuery(query);
+  const { loading, error, data } = useQuery(fetchUsers);
   if (loading) return <Spin size="large" />;
   if (error)
     return (
@@ -30,8 +20,6 @@ const Users = () => {
         type="error"
       />
     );
-
-  console.log("data", data);
 
   return (
     <div>

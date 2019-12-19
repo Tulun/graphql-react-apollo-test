@@ -1,14 +1,42 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import fetchUsers from "../../queries/fetchUsers";
 
 import "./AddUserForm.scss";
 
+const ADD_USER = gql`
+  mutation AddUser($firstName: String!, $age: Int) {
+    addUser(firstName: $firstName, age: $age) {
+      id
+      firstName
+      age
+    }
+  }
+`;
+
 const AddUserForm = () => {
-  const [firstName, setFirstname] = useState("");
-  const [age, setAge] = useState(0);
+  const [firstName, setFirstName] = useState("");
+  const [age, setAge] = useState();
+
+  // Update the cache when you create a new user
+  const [addUser] = useMutation(ADD_USER, {
+    update(cache, { data: { addUser } }) {
+      const { users } = cache.readQuery({ query: fetchUsers });
+      cache.writeQuery({
+        query: fetchUsers,
+        data: { users: users.concat([addUser]) }
+      });
+    }
+  });
 
   const onSubmit = event => {
     event.preventDefault();
-    console.log(firstName, age);
+    // console.log(firstName, age);
+    const ageValue = age;
+    addUser({ variables: { firstName, age: parseInt(ageValue) } });
+    setFirstName("");
+    setAge();
   };
 
   return (
@@ -18,7 +46,7 @@ const AddUserForm = () => {
       <input
         className="input"
         type="text"
-        onChange={event => setFirstname(event.target.value)}
+        onChange={event => setFirstName(event.target.value)}
         value={firstName}
       />
       <label className="label">Age (optional)</label>
