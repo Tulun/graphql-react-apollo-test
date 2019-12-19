@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "antd";
+import { withRouter } from "react-router";
 
 import "./Navbar.scss";
 
-const Navbar = () => {
-  const [currentView, setCurrentView] = useState("index");
+const Navbar = ({ location }) => {
+  const [currentView, setCurrentView] = useState(
+    location.pathname !== "/" ? location.pathname.substring(1) : "index"
+  );
   return (
     <Menu
       onClick={event => setCurrentView(event.key)}
@@ -26,4 +29,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

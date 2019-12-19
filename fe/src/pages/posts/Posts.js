@@ -27,7 +27,7 @@ const Posts = () => {
   if (error)
     return (
       <Alert
-        message={`Error with users fetch: ${error.message}`}
+        message={`Error with posts fetch: ${error.message}`}
         type="error"
       />
     );
@@ -52,16 +52,5 @@ const Posts = () => {
     </div>
   );
 };
-
-// {
-//   data.posts.map(({ id, content, user }) => {
-//     return (
-//       <li className="list-item" key={id}>
-//         {content}
-//         <span className="user-span">User: {user.id}</span>
-//       </li>
-//     );
-//   });
-// }
 
 export default Posts;
