@@ -37,6 +37,7 @@ const User = ({ match }) => {
       <EditUserForm
         currentAge={data.user.age || 0}
         currentFirstName={data.user.firstName}
+        userId={match.params.id}
       />
       <AddPostForm userId={match.params.id} />
       <List

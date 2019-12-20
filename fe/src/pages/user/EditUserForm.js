@@ -5,21 +5,21 @@ import { gql } from "apollo-boost";
 
 // import "./AddUserForm.scss";
 
-// const ADD_USER = gql`
-//   mutation AddUser($firstName: String!, $age: Int) {
-//     addUser(firstName: $firstName, age: $age) {
-//       id
-//       firstName
-//       age
-//     }
-//   }
-// `;
+const EDIT_USER = gql`
+  mutation EditUser($id: String!, $firstName: String, $age: Int) {
+    editUser(id: $id, firstName: $firstName, age: $age) {
+      id
+      firstName
+      age
+    }
+  }
+`;
 
-const EditUserForm = ({ currentAge, currentFirstName }) => {
+const EditUserForm = ({ currentAge, currentFirstName, userId }) => {
   const [firstName, setFirstName] = useState(currentFirstName);
   const [age, setAge] = useState(currentAge);
 
-  // // Update the cache when you create a new user
+  // Update the cache when you create a new user
   // const [addUser] = useMutation(ADD_USER, {
   //   update(cache, { data: { addUser } }) {
   //     const { users } = cache.readQuery({ query: fetchUsers });
@@ -30,13 +30,12 @@ const EditUserForm = ({ currentAge, currentFirstName }) => {
   //   }
   // });
 
+  const [editUser] = useMutation(EDIT_USER);
+
   const onSubmit = event => {
     event.preventDefault();
-    console.log(firstName, age);
     const ageValue = age;
-    // addUser({ variables: { firstName, age: parseInt(ageValue) } });
-    // setFirstName("");
-    // setAge();
+    editUser({ variables: { id: userId, firstName, age: parseInt(ageValue) } });
   };
 
   return (
