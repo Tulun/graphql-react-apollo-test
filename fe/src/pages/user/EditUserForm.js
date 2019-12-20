@@ -19,17 +19,6 @@ const EditUserForm = ({ currentAge, currentFirstName, userId }) => {
   const [firstName, setFirstName] = useState(currentFirstName);
   const [age, setAge] = useState(currentAge);
 
-  // Update the cache when you create a new user
-  // const [addUser] = useMutation(ADD_USER, {
-  //   update(cache, { data: { addUser } }) {
-  //     const { users } = cache.readQuery({ query: fetchUsers });
-  //     cache.writeQuery({
-  //       query: fetchUsers,
-  //       data: { users: users.concat([addUser]) }
-  //     });
-  //   }
-  // });
-
   const [editUser] = useMutation(EDIT_USER);
 
   const onSubmit = event => {
