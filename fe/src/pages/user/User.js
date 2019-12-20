@@ -6,6 +6,7 @@ import findUser from "../../queries/fetchUser";
 import AddPostForm from "./AddPostForm";
 import EditUserForm from "./EditUserForm";
 
+import "./User.scss";
 const { Item } = List;
 const { Text } = Typography;
 
@@ -32,8 +33,8 @@ const User = ({ match }) => {
 
   return (
     <div>
-      <p>Name: {data.user.firstName}</p>
-      <p>Age: {data.user.age || "Age not specified."}</p>
+      <p className="text">Name: {data.user.firstName}</p>
+      <p className="text">Age: {data.user.age || "Age not specified."} </p>
       <EditUserForm
         currentAge={data.user.age || 0}
         currentFirstName={data.user.firstName}

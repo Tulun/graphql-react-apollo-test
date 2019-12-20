@@ -1,9 +1,17 @@
 .user-list-item {
   cursor: pointer;
-
+  &:hover {
+    background-color: ghostwhite;
+  }
   a {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
+}
+
+.delete {
+  float: right;
+  margin-left: 16px;
+  font-size: 1.25rem;
 }

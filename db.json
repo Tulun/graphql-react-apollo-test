@@ -28,26 +28,6 @@
       "firstName": "Sir Fitzroy",
       "age": 23,
       "id": "qL4-uBq"
-    },
-    {
-      "firstName": "Testing 123",
-      "age": 5,
-      "id": "hy_jilm"
-    },
-    {
-      "firstName": "Another ",
-      "age": 1,
-      "id": "yNO2EdS"
-    },
-    {
-      "firstName": "More nonsense",
-      "age": 5,
-      "id": "BcALbBP"
-    },
-    {
-      "firstName": "Did my thing work?",
-      "age": 3,
-      "id": "WaK2WMi"
     }
   ],
   "posts": [
