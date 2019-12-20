@@ -4,6 +4,7 @@ import { Spin, Alert, List, Typography } from "antd";
 import fetchPosts from "../../queries/fetchPosts";
 import findUser from "../../queries/fetchUser";
 import AddPostForm from "./AddPostForm";
+import EditUserForm from "./EditUserForm";
 
 const { Item } = List;
 const { Text } = Typography;
@@ -33,6 +34,10 @@ const User = ({ match }) => {
     <div>
       <p>Name: {data.user.firstName}</p>
       <p>Age: {data.user.age || "Age not specified."}</p>
+      <EditUserForm
+        currentAge={data.user.age || 0}
+        currentFirstName={data.user.firstName}
+      />
       <AddPostForm userId={match.params.id} />
       <List
         header={<div>Posts</div>}
