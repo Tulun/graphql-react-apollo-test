@@ -44,7 +44,7 @@ const Users = () => {
         variables: { id: deletedUserId }
       });
     }
-  }, [deletedUserId]);
+  }, [deletedUserId, deleteUser]);
 
   if (loading) return <Spin size="large" />;
   if (error)
