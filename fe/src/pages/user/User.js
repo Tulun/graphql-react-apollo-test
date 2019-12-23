@@ -44,14 +44,12 @@ const User = ({ match }) => {
       <List
         header={<div>Posts</div>}
         bordered
-        dataSource={postsData.posts.filter(
-          el => el.user.id === match.params.id
-        )}
+        dataSource={postsData.posts.filter(el => el.userId === match.params.id)}
         renderItem={({ content, likes }) => {
           return (
             <Item className="user-list-item">
-              <Text mark>{content}</Text>
-              <Text className="user-span">{likes}</Text>
+              <Text mark>Content: {content}</Text> <br />
+              <Text className="user-span">Likes: {likes}</Text>
             </Item>
           );
         }}

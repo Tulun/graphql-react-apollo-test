@@ -5,10 +5,8 @@ export default gql`
     posts {
       id
       content
-      user {
-        id
-        firstName
-      }
+      likes
+      userId
     }
   }
 `;

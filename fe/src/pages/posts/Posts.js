@@ -27,11 +27,11 @@ const Posts = () => {
         header={<div>Posts</div>}
         bordered
         dataSource={data.posts}
-        renderItem={({ content, user }) => {
+        renderItem={({ content, userId }) => {
           return (
             <Item className="list-item">
               <Text mark>{content}</Text>
-              <Text className="user-span">User: {user.id}</Text>
+              <Text className="user-span">User: {userId}</Text>
             </Item>
           );
         }}

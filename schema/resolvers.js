@@ -14,14 +14,31 @@ const resolvers = {
           console.log("err", err, err.message);
         });
     },
-    user: (_pv, args) => {
-      return axios.get(`${dbUrl}/users/${args.id}`).then(res => res.data);
+    user: (_pv, { id }) => {
+      console.log("_pv", _pv, "id", id);
+      return axios
+        .get(`${dbUrl}/users/${id}`)
+        .then(res => {
+          console.log("res", res);
+          return res.data;
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
     },
     posts: () => {
-      return axios.get(`${dbUrl}/posts`).then(res => res.data);
+      return axios
+        .get(`${dbUrl}/posts`)
+        .then(res => {
+          console.log("res in posts", res);
+          return res.data;
+        })
+        .catch(err => {
+          console.log("err in posts", err);
+        });
     },
-    post: (_pv, args) => {
-      return axios.get(`${dbUrl}/posts/${args.id}`).then(res => res.data);
+    post: (_pv, { id }) => {
+      return axios.get(`${dbUrl}/posts/${id}`).then(res => res.data);
     }
   },
   Mutation: {
