@@ -5,13 +5,13 @@ const resolvers = {
     users: () => {
       return axios
         .get(`${dbUrl}/users`)
-        .then(res => {
-          console.log(res);
-          return res.data;
-        })
+        .then(res => res.data)
         .catch(err => {
           console.log("err", err, err.message);
         });
+    },
+    posts: () => {
+      return axios.get(`${dbUrl}/posts`).then(res => res.data);
     }
   }
 };
