@@ -1,6 +1,14 @@
 const { gql } = require("apollo-server");
 
 const types = gql`
+  type Subscription {
+    postAdded: Post
+  }
+
+  type Mutation {
+    addUser(firstName: String!, age: Int): User
+  }
+
   type User {
     id: String!
     firstName: String!

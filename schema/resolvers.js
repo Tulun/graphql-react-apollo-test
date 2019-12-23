@@ -1,5 +1,9 @@
 const axios = require("axios");
 const { dbUrl } = require("../config");
+const { PubSub } = require("apollo-server");
+
+const pubsub = new PubSub();
+
 const resolvers = {
   Query: {
     users: () => {
@@ -18,6 +22,11 @@ const resolvers = {
     },
     post: (_pv, args) => {
       return axios.get(`${dbUrl}/posts/${args.id}`).then(res => res.data);
+    }
+  },
+  Mutation: {
+    addUser: (_pv, args) => {
+      return axios.post(`${dbUrl}/users`, args).then(res => res.data);
     }
   }
 };
