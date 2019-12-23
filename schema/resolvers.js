@@ -3,6 +3,7 @@ const { dbUrl } = require("../config");
 const { PubSub } = require("apollo-server");
 
 const pubsub = new PubSub();
+const USER_ADDED = "USER_ADDED";
 
 const resolvers = {
   Query: {
@@ -15,7 +16,6 @@ const resolvers = {
         });
     },
     user: (_pv, { id }) => {
-      console.log("_pv", _pv, "id", id);
       return axios
         .get(`${dbUrl}/users/${id}`)
         .then(res => {
@@ -43,6 +43,7 @@ const resolvers = {
   },
   Mutation: {
     addUser: (_pv, args) => {
+      pubsub.publish(USER_ADDED, { userAdded: args });
       return axios.post(`${dbUrl}/users`, args).then(res => res.data);
     },
     editUser: (_pv, { id, firstName, age }) => {
@@ -52,6 +53,12 @@ const resolvers = {
     },
     deleteUser: (pv, { id }) => {
       return axios.delete(`${dbUrl}/users/${id}`).then(res => res.data);
+    }
+  },
+  Subscription: {
+    userAdded: {
+      // Additional event labels can be passed to asyncIterator creation
+      subscribe: () => pubsub.asyncIterator([USER_ADDED])
     }
   }
 };

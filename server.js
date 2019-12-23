@@ -48,7 +48,7 @@ app.use(cors());
 //   }
 // };
 
-const server = new ApolloServer({ typeDefs: types, resolvers });
+const server = new ApolloServer({ typeDefs: types, resolvers, tracing: true });
 
 // The `listen` method launches a web server.
 server.listen(PORT).then(({ url }) => {

@@ -2,7 +2,7 @@ const { gql } = require("apollo-server");
 
 const types = gql`
   type Subscription {
-    postAdded: Post
+    userAdded: User
   }
 
   type Mutation {
