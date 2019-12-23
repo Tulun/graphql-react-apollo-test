@@ -15,11 +15,11 @@ const resolvers = {
     },
     posts: () => {
       return axios.get(`${dbUrl}/posts`).then(res => res.data);
+    },
+    post: (_pv, args) => {
+      return axios.get(`${dbUrl}/posts/${args.id}`).then(res => res.data);
     }
   }
-  // User: (_pv, args) => {
-  //   return axios.get(`${dbUrl}/users/${args.id}`).then(res => res.data);
-  // }
 };
 
 module.exports = resolvers;

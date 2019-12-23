@@ -16,8 +16,9 @@ const types = gql`
 
   type Query {
     users: [User]
-    posts: [Post]
     user(id: String!): User
+    posts: [Post]
+    post(id: String!): Post
   }
 `;
 
