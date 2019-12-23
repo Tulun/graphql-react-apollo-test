@@ -7,18 +7,20 @@ const types = gql`
 
   type Mutation {
     addUser(firstName: String!, age: Int): User
+    editUser(id: String!, firstName: String, age: Int): User
+    deleteUser(id: String!): User
   }
 
   type User {
-    id: String!
-    firstName: String!
+    id: String
+    firstName: String
     age: Int
   }
 
   type Post {
-    id: String!
-    content: String!
-    userId: String!
+    id: String
+    content: String
+    userId: String
     likes: Int
   }
 

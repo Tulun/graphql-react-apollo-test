@@ -27,6 +27,14 @@ const resolvers = {
   Mutation: {
     addUser: (_pv, args) => {
       return axios.post(`${dbUrl}/users`, args).then(res => res.data);
+    },
+    editUser: (_pv, { id, firstName, age }) => {
+      return axios
+        .patch(`${dbUrl}/users/${id}`, { firstName, age })
+        .then(res => res.data);
+    },
+    deleteUser: (pv, { id }) => {
+      return axios.delete(`${dbUrl}/users/${id}`).then(res => res.data);
     }
   }
 };
