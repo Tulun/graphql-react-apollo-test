@@ -7,7 +7,7 @@ const UserType = require("./userType");
 const PostType = require("./postType");
 
 // config
-const { dbUrl } = require("../config");
+const { dbUrl } = require("../../config");
 const { GraphQLObjectType, GraphQLString, GraphQLList } = graphql;
 
 const RootQuery = new GraphQLObjectType({

@@ -8,7 +8,7 @@ const {
   GraphQLNonNull,
   GraphQLInt
 } = graphql;
-const { dbUrl } = require("../config");
+const { dbUrl } = require("../../config");
 
 // Types
 const UserType = require("./userType");
@@ -61,30 +61,6 @@ const mutation = new GraphQLObjectType({
           .then(res => res.data);
       }
     }
-    // addLyricToSong: {
-    //   type: SongType,
-    //   args: {
-    //     content: { type: GraphQLString },
-    //     songId: { type: GraphQLID }
-    //   },
-    //   resolve(parentValue, { content, songId }) {
-    //     return Song.addLyric(songId, content);
-    //   }
-    // },
-    // likeLyric: {
-    //   type: LyricType,
-    //   args: { id: { type: GraphQLID } },
-    //   resolve(parentValue, { id }) {
-    //     return Lyric.like(id);
-    //   }
-    // },
-    // deleteSong: {
-    //   type: SongType,
-    //   args: { id: { type: GraphQLID } },
-    //   resolve(parentValue, { id }) {
-    //     return Song.remove({ _id: id });
-    //   }
-    // }
   }
 });
 

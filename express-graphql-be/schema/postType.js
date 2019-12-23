@@ -4,7 +4,7 @@ const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLInt } = graphql;
 
 // config
-const { dbUrl } = require("../config");
+const { dbUrl } = require("../../config");
 
 // Types
 const UserType = require("./userType");
