@@ -39,7 +39,6 @@ const link = split(
   // split based on operation type
   ({ query }) => {
     const definition = getMainDefinition(query);
-    console.log("definition", definition.operation);
     return (
       definition.kind === "OperationDefinition" &&
       definition.operation === "subscription"

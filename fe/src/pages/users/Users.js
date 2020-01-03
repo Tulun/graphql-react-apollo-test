@@ -25,7 +25,8 @@ const DELETE_USER = gql`
 `;
 
 const Users = () => {
-  useUserAdded();
+  const { data: subscriptionData } = useUserAdded();
+  console.log("subscriptionData", subscriptionData);
   const { loading, error, data } = useQuery(fetchUsers);
   const [deletedUserId, setDeletedUserId] = useState("");
   // Update the cache when you create a new user

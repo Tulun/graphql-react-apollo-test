@@ -16,7 +16,7 @@ const server = new ApolloServer({
   tracing: true,
   subscriptions: {
     onConnect: (connectionParams, webSocket) => {
-      console.log("hit onConnect", webSocket);
+      console.log("hit onConnect");
       return true;
       // if (connectionParams.authToken) {
       //   return validateToken(connectionParams.authToken)
@@ -31,8 +31,11 @@ const server = new ApolloServer({
       // throw new Error("Missing auth token!");
     }
   },
+  onDisconnect: (webSocket, context) => {
+    console.log("Did we disconnect?");
+  },
   context: async ({ req, connection }) => {
-    console.log("Hit here: Connection param:", connection);
+    console.log("Hit here");
     if (connection) {
       // check connection for metadata
       return connection.context;

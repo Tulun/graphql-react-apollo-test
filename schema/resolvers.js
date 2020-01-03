@@ -67,8 +67,16 @@ const resolvers = {
   },
   Mutation: {
     addUser: (_pv, args) => {
-      pubsub.publish(userAdded, { userAdded: args });
-      return axios.post(`${dbUrl}/users`, args).then(res => res.data);
+      return axios.post(`${dbUrl}/users`, args).then(res => {
+        pubsub.publish(userAdded, {
+          userAdded: {
+            firstName: args.firstName,
+            age: args.age,
+            id: res.data.id
+          }
+        });
+        return res.data;
+      });
     },
     editUser: (_pv, { id, firstName, age }) => {
       return axios
