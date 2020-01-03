@@ -17,6 +17,15 @@ const publish = () => {
 };
 
 const resolvers = {
+  Subscription: {
+    userAdded: {
+      // Additional event labels can be passed to asyncIterator creation
+      subscribe: () => pubsub.asyncIterator([userAdded])
+    },
+    info: {
+      subscribe: () => pubsub.asyncIterator([TOPIC])
+    }
+  },
   Query: {
     users: () => {
       return axios
@@ -68,18 +77,6 @@ const resolvers = {
     },
     deleteUser: (pv, { id }) => {
       return axios.delete(`${dbUrl}/users/${id}`).then(res => res.data);
-    }
-  },
-  Subscription: {
-    userAdded: {
-      // Additional event labels can be passed to asyncIterator creation
-      subscribe: () => {
-        console.log("in subscribe", userAdded);
-        return pubsub.asyncIterator([userAdded]);
-      }
-    },
-    info: {
-      subscribe: () => pubsub.asyncIterator([TOPIC])
     }
   }
 };

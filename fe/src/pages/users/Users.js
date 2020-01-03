@@ -6,6 +6,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 import fetchUsers from "../../queries/fetchUsers";
+import useUserAdded from "../../subscriptions/useUserAdded";
+
 import AddUserForm from "./AddUserForm";
 import "./Users.scss";
 
@@ -23,6 +25,7 @@ const DELETE_USER = gql`
 `;
 
 const Users = () => {
+  useUserAdded();
   const { loading, error, data } = useQuery(fetchUsers);
   const [deletedUserId, setDeletedUserId] = useState("");
   // Update the cache when you create a new user

@@ -16,7 +16,7 @@ const server = new ApolloServer({
   tracing: true,
   subscriptions: {
     onConnect: (connectionParams, webSocket) => {
-      console.log("hit onConnect");
+      console.log("hit onConnect", webSocket);
       return true;
       // if (connectionParams.authToken) {
       //   return validateToken(connectionParams.authToken)
