@@ -1,9 +1,20 @@
 const axios = require("axios");
 const { dbUrl } = require("../config");
-const { PubSub } = require("apollo-server");
+const { PubSub } = require("apollo-server-express");
 
 const pubsub = new PubSub();
 const userAdded = "userAdded";
+
+const TOPIC = "infoTopic";
+
+const infos = ["info1", "info2", "info3", "done"];
+
+const publish = () => {
+  setTimeout(
+    () => infos.forEach(info => pubsub.publish(TOPIC, { info })),
+    1000
+  );
+};
 
 const resolvers = {
   Query: {
@@ -39,6 +50,10 @@ const resolvers = {
     },
     post: (_pv, { id }) => {
       return axios.get(`${dbUrl}/posts/${id}`).then(res => res.data);
+    },
+    go: () => {
+      publish();
+      return "going";
     }
   },
   Mutation: {
@@ -58,7 +73,13 @@ const resolvers = {
   Subscription: {
     userAdded: {
       // Additional event labels can be passed to asyncIterator creation
-      subscribe: () => pubsub.asyncIterator([userAdded])
+      subscribe: () => {
+        console.log("in subscribe", userAdded);
+        return pubsub.asyncIterator([userAdded]);
+      }
+    },
+    info: {
+      subscribe: () => pubsub.asyncIterator([TOPIC])
     }
   }
 };
