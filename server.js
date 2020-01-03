@@ -1,8 +1,7 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const { ApolloServer, gql } = require("apollo-server");
-const myGraphQLSchema = require("./express-graphql-be/schema/schema");
+const { ApolloServer, gql } = require("apollo-server-express");
 const cors = require("cors");
+const http = require("http");
 
 // schema
 const resolvers = require("./schema/resolvers");
@@ -11,46 +10,51 @@ const PORT = 4000;
 
 const app = express();
 app.use(cors());
+const server = new ApolloServer({
+  typeDefs: types,
+  resolvers,
+  tracing: true,
+  subscriptions: {
+    onConnect: (connectionParams, webSocket) => {
+      console.log("hit onConnect");
+      return true;
+      // if (connectionParams.authToken) {
+      //   return validateToken(connectionParams.authToken)
+      //     .then(findUser(connectionParams.authToken))
+      //     .then(user => {
+      //       return {
+      //         currentUser: user
+      //       };
+      //     });
+      // }
 
-// const typeDefs = gql`
-//   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+      // throw new Error("Missing auth token!");
+    }
+  },
+  context: async ({ req, connection }) => {
+    console.log("Hit here: Connection param:", connection);
+    if (connection) {
+      // check connection for metadata
+      return connection.context;
+    } else {
+      // check from req
+      const token = req.headers.authorization || "";
 
-//   # This "Book" type defines the queryable fields for every book in our data source.
-//   type Book {
-//     title: String
-//     author: String
-//   }
+      return { token };
+    }
+  }
+});
 
-//   # The "Query" type is special: it lists all of the available queries that
-//   # clients can execute, along with the return type for each. In this
-//   # case, the "books" query returns an array of zero or more Books (defined above).
-//   type Query {
-//     books: [Book]
-//   }
-// `;
-
-// const books = [
-//   {
-//     title: "Harry Potter and the Chamber of Secrets",
-//     author: "J.K. Rowling"
-//   },
-//   {
-//     title: "Jurassic Park",
-//     author: "Michael Crichton"
-//   }
-// ];
-
-// // Resolvers define the technique for fetching the types defined in the
-// // schema. This resolver retrieves books from the "books" array above.
-// const resolvers = {
-//   Query: {
-//     books: () => books
-//   }
-// };
-
-const server = new ApolloServer({ typeDefs: types, resolvers, tracing: true });
+server.applyMiddleware({ app });
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
 
 // The `listen` method launches a web server.
-server.listen(PORT).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+httpServer.listen(PORT, () => {
+  console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  );
+  console.log(
+    `🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`
+  );
 });

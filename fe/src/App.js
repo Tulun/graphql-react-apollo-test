@@ -30,7 +30,9 @@ const httpLink = new HttpLink({
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000/graphql`,
   options: {
-    reconnect: true
+    reconnect: true,
+    timeout: 20000,
+    lazy: true
   }
 });
 
@@ -38,6 +40,7 @@ const link = split(
   // split based on operation type
   ({ query }) => {
     const definition = getMainDefinition(query);
+    console.log("definition", definition);
     return (
       definition.kind === "OperationDefinition" &&
       definition.operation === "subscription"

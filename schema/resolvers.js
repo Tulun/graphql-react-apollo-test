@@ -3,7 +3,7 @@ const { dbUrl } = require("../config");
 const { PubSub } = require("apollo-server");
 
 const pubsub = new PubSub();
-const USER_ADDED = "USER_ADDED";
+const userAdded = "userAdded";
 
 const resolvers = {
   Query: {
@@ -43,7 +43,7 @@ const resolvers = {
   },
   Mutation: {
     addUser: (_pv, args) => {
-      pubsub.publish(USER_ADDED, { userAdded: args });
+      pubsub.publish(userAdded, { userAdded: args });
       return axios.post(`${dbUrl}/users`, args).then(res => res.data);
     },
     editUser: (_pv, { id, firstName, age }) => {
@@ -58,7 +58,7 @@ const resolvers = {
   Subscription: {
     userAdded: {
       // Additional event labels can be passed to asyncIterator creation
-      subscribe: () => pubsub.asyncIterator([USER_ADDED])
+      subscribe: () => pubsub.asyncIterator([userAdded])
     }
   }
 };
