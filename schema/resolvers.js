@@ -5,10 +5,9 @@ const { PubSub } = require("apollo-server-express");
 const pubsub = new PubSub();
 const userAdded = "userAdded";
 
+// the following is included to test out Subscriptions
 const TOPIC = "infoTopic";
-
 const infos = ["info1", "info2", "info3", "done"];
-
 const publish = () => {
   setTimeout(
     () => infos.forEach(info => pubsub.publish(TOPIC, { info })),

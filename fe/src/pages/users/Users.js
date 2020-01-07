@@ -25,8 +25,11 @@ const DELETE_USER = gql`
 `;
 
 const Users = () => {
+  // It should be noted that subscriptions are working here, but I haven't implemented my view to respond to them.
+  // What you should do is a basic fetching of the data while leveraging the subscription for any subsequent updates
+  // While the user is on the website.
   const { data: subscriptionData } = useUserAdded();
-  console.log("subscriptionData", subscriptionData);
+  console.log("subcriptions work!", subscriptionData);
   const { loading, error, data } = useQuery(fetchUsers);
   const [deletedUserId, setDeletedUserId] = useState("");
   // Update the cache when you create a new user

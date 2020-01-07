@@ -1,3 +1,6 @@
+// This file does all the setup for the apollo client
+// Includes the backend link to your graphql backend, the websocket connection for subscriptions
+// and how you want to handle your cache.
 import { split } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import { ApolloClient } from "apollo-client";
@@ -23,15 +26,6 @@ const subClient = new SubscriptionClient(`ws://localhost:4000/graphql`, {
   timeout: 20000,
   lazy: true
 });
-
-// const subClient = new SubscriptionClient({
-//   uri: `ws://localhost:4000/graphql`,
-//   options: {
-//     reconnect: true,
-//     timeout: 20000,
-//     lazy: true
-//   }
-// });
 
 const wsLink = new WebSocketLink(subClient);
 
