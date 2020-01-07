@@ -5,37 +5,27 @@ const http = require("http");
 
 // schema
 const resolvers = require("./schema/resolvers");
-const types = require("./schema/types");
+const typeDefs = require("./schema/types");
 const PORT = 4000;
 
+// Basic Node server.
 const app = express();
 app.use(cors());
+
+// Setup for the Apollo server
 const server = new ApolloServer({
-  typeDefs: types,
+  typeDefs,
   resolvers,
   tracing: true,
   subscriptions: {
     onConnect: (connectionParams, webSocket) => {
-      console.log("hit onConnect");
-      return true;
-      // if (connectionParams.authToken) {
-      //   return validateToken(connectionParams.authToken)
-      //     .then(findUser(connectionParams.authToken))
-      //     .then(user => {
-      //       return {
-      //         currentUser: user
-      //       };
-      //     });
-      // }
-
-      // throw new Error("Missing auth token!");
+      // Do something when they connect
     }
   },
   onDisconnect: (webSocket, context) => {
-    console.log("Did we disconnect?");
+    // Do something when they disconnect
   },
   context: async ({ req, connection }) => {
-    console.log("Hit here");
     if (connection) {
       // check connection for metadata
       return connection.context;

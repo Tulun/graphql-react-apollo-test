@@ -7,6 +7,7 @@ import { withRouter } from "react-router";
 import "./Navbar.scss";
 
 const { Item } = Menu;
+
 const Navbar = ({ location }) => {
   const [currentView, setCurrentView] = useState(
     location.pathname !== "/" ? location.pathname.substring(1) : "index"
